@@ -1,0 +1,59 @@
+
+<!-- TP n°1 -->
+
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <link href="text.css" rel="stylesheet" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <title>Time</title>
+</head>
+
+<body>
+
+    <div class="div" display="block" text-align="center">
+        <div clas="img">
+            <img src="bitcoin.png">
+        </div>
+        <label id="bitcoin1" style="font-family: 'Orbitron', sans-serif;"></label>
+        <br />
+        <label id="bitcoin2" style="font-family: 'Orbitron', sans-serif;"></label>
+        <br />
+        <label id="bitcoin3" style="font-family: 'Orbitron', sans-serif;"></label>
+        <br />
+    </div>
+
+    <script>
+
+        //Get hours
+        function reqListener() {
+            var btc1 = document.getElementById("bitcoin1");
+            var btc2 = document.getElementById("bitcoin2");
+            var btc3 = document.getElementById("bitcoin3");
+
+            var json = this.response;
+
+            var btcValue1 = json.bpi.USD["code"] + "   " + json.bpi.USD["rate"] + "   " +  json.bpi.USD["symbol"];
+            var btcValue2 = json.bpi.GBP["code"] + "   " + json.bpi.GBP["rate"] + "   " +  json.bpi.GBP["symbol"];
+            var btcValue3 = json.bpi.EUR["code"] + "   " + json.bpi.EUR["rate"] + "   " +  json.bpi.EUR["symbol"];
+
+            document.getElementById("bitcoin1").innerHTML = btcValue1;
+            document.getElementById("bitcoin2").innerHTML = btcValue2;
+            document.getElementById("bitcoin3").innerHTML = btcValue3;
+
+        }
+        //Display hours
+        setInterval(function () {
+            var oReq = new XMLHttpRequest();
+            oReq.onload = reqListener;
+            oReq.open("get", "https://api.coindesk.com/v1/bpi/currentprice.json", true);
+            oReq.responseType = "json";
+            oReq.send();
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

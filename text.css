@@ -1,0 +1,9 @@
+.div{
+    display: block;
+    text-align: center;
+}
+#timer{
+    font-size: 120px;
+    margin-bottom: 120px;
+}
+
